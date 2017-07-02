@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://github.com/Caroline73/categories/index.html</loc>
+    
+    <lastmod>2017-07-02T07:30:20.689Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://github.com/Caroline73/tags/index.html</loc>
+    
+    <lastmod>2017-07-02T07:30:02.247Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://github.com/Caroline73/posts/title</loc>
     
     <lastmod>2017-07-02T07:10:07.731Z</lastmod>
@@ -12,20 +26,6 @@
     <loc>http://github.com/Caroline73/about/index.html</loc>
     
     <lastmod>2017-07-02T07:07:55.688Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://github.com/Caroline73/tags/index.html</loc>
-    
-    <lastmod>2017-07-02T07:00:14.801Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://github.com/Caroline73/categories/index.html</loc>
-    
-    <lastmod>2017-07-02T07:00:09.803Z</lastmod>
     
   </url>
   
