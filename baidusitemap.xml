@@ -4,11 +4,11 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/07/03/reducereduceRight%E5%A4%84%E7%90%86%E5%BC%82%E6%AD%A5%E5%90%8C%E6%AD%A5%E5%8C%96/</loc>
-    <lastmod>2017-07-04T06:42:57.568Z</lastmod>
+    <loc>http://yoursite.com/2017/07/03/reduce%E5%A4%84%E7%90%86%E5%BC%82%E6%AD%A5%E5%90%8C%E6%AD%A5%E5%8C%96/</loc>
+    <lastmod>2017-07-04T06:47:50.030Z</lastmod>
     <data>
         <display>
-        <title>reduce/reduceRight处理异步同步化</title>
+        <title>reduce处理异步同步化</title>
         <pubTime>2017-07-03T02:37:14.000Z</pubTime>
         
         <tag>javascript</tag>

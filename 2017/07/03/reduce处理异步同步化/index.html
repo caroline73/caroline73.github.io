@@ -6,19 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>reduce/reduceRight处理异步同步化 | Caroline多维空间</title>
+  <title>reduce处理异步同步化 | Caroline多维空间</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在业务开发中遇到了一个场景，需要command-line linerface，然后程序根据用户输入做出不同处理，并且用户的输入是连续的。在查找了node.js的文档后，我找到了readLine的api。 什么是readLine  readLine是node.js里实现标准输入输出的模块，通过这个模块我们可以以逐行的方式读取数据流。 如何使用readLine 创建readLine实例 学习里面的">
+  <meta name="description" content="在业务开发中遇到了一个场景，需要command-line linerface，然后程序根据用户输入做出不同处理，并且用户的输入是连续的。在查找了node.js的文档后，我找到了readLine的api。 什么是readLine  readLine是node.js里实现标准输入输出的模块，通过这个模块我们可以以逐行的方式读取数据流。">
 <meta name="keywords" content="javascript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="reduce&#x2F;reduceRight处理异步同步化">
-<meta property="og:url" content="http://yoursite.com/2017/07/03/reducereduceRight处理异步同步化/index.html">
+<meta property="og:title" content="reduce处理异步同步化">
+<meta property="og:url" content="http://yoursite.com/2017/07/03/reduce处理异步同步化/index.html">
 <meta property="og:site_name" content="Caroline多维空间">
-<meta property="og:description" content="在业务开发中遇到了一个场景，需要command-line linerface，然后程序根据用户输入做出不同处理，并且用户的输入是连续的。在查找了node.js的文档后，我找到了readLine的api。 什么是readLine  readLine是node.js里实现标准输入输出的模块，通过这个模块我们可以以逐行的方式读取数据流。 如何使用readLine 创建readLine实例 学习里面的">
-<meta property="og:updated_time" content="2017-07-04T06:42:57.568Z">
+<meta property="og:description" content="在业务开发中遇到了一个场景，需要command-line linerface，然后程序根据用户输入做出不同处理，并且用户的输入是连续的。在查找了node.js的文档后，我找到了readLine的api。 什么是readLine  readLine是node.js里实现标准输入输出的模块，通过这个模块我们可以以逐行的方式读取数据流。">
+<meta property="og:updated_time" content="2017-07-04T06:47:50.030Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="reduce&#x2F;reduceRight处理异步同步化">
-<meta name="twitter:description" content="在业务开发中遇到了一个场景，需要command-line linerface，然后程序根据用户输入做出不同处理，并且用户的输入是连续的。在查找了node.js的文档后，我找到了readLine的api。 什么是readLine  readLine是node.js里实现标准输入输出的模块，通过这个模块我们可以以逐行的方式读取数据流。 如何使用readLine 创建readLine实例 学习里面的">
+<meta name="twitter:title" content="reduce处理异步同步化">
+<meta name="twitter:description" content="在业务开发中遇到了一个场景，需要command-line linerface，然后程序根据用户输入做出不同处理，并且用户的输入是连续的。在查找了node.js的文档后，我找到了readLine的api。 什么是readLine  readLine是node.js里实现标准输入输出的模块，通过这个模块我们可以以逐行的方式读取数据流。">
   
   
     <link rel="icon" href="/favicon.png">
@@ -134,19 +134,19 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="node-reducereduceRight处理异步同步化" class="article article-type-node " itemscope itemprop="blogPost">
+            <article id="node-reduce处理异步同步化" class="article article-type-node " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      reduce/reduceRight处理异步同步化
+      reduce处理异步同步化
     </h1>
   
 
         
-        <a href="/2017/07/03/reducereduceRight处理异步同步化/" class="archive-article-date">
+        <a href="/2017/07/03/reduce处理异步同步化/" class="archive-article-date">
   	<time datetime="2017-07-03T02:37:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-03</time>
 </a>
         
@@ -155,7 +155,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>  在业务开发中遇到了一个场景，需要command-line linerface，然后程序根据用户输入做出不同处理，并且用户的输入是连续的。在查找了node.js的文档后，我找到了readLine的api。</p>
-<h2 id="什么是readLine"><a href="#什么是readLine" class="headerlink" title="什么是readLine"></a>什么是readLine</h2><p>  readLine是node.js里实现标准输入输出的模块，通过这个模块我们可以以逐行的方式读取数据流。</p>
+<h2 id="什么是readLine"><a href="#什么是readLine" class="headerlink" title="什么是readLine"></a>什么是readLine</h2><p>  readLine是node.js里实现标准输入输出的模块，通过这个模块我们可以以逐行的方式读取数据流。<br><a id="more"></a></p>
 <h3 id="如何使用readLine"><a href="#如何使用readLine" class="headerlink" title="如何使用readLine"></a>如何使用readLine</h3><ul>
 <li>创建readLine实例</li>
 <li>学习里面的接口方法</li>
@@ -274,7 +274,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACrUlEQVR42u3a0WrDQAwEwPz/T7evgdJm96QLoYyfipPamgv4ZEmPR3x8PR0/z/z8NP/O8zeTGB43Djw8PLxB6L+F0oaYf+fsmknMeHh4eLd5k1D+DiLfKpLzecx4eHh4n8abpMs5Aw8PD+8/8fIHfZ5AJ8uBh4eH9zm8s0CTT3NAfuZKrQUPDw+vy3ujLtLn/H2lv4eHh4c37qq3BYiz80noh1Hh4eHhXeDlr/p5K+usbJGMeR0m1nh4eHirvKRxVRRMBwlxUrpt746Hh4d3j5c/uJPzZ6l2uxnUnT08PDy8VV6yMeTgFpAvWf3D4OHh4b2Ft9WUSsoZyTJNlh4PDw/vPbz2QmcbxqS5VcSPh4eHd4GXv/C3BYLdFDy/y4tfEg8PD2/My5PmpCw7SZ3nTa+oSo2Hh4e3ytsqLuSpcL587agWHh4e3j1eWxTIH/ftVnE2OpBHiIeHh7fFK/RxoaH937a1VmxUeHh4eBd4bQE3b4ZNGmP5AFa00Hh4eHirvLMkON9a8tR891M8PDy8e7z2hT8fC0hKBu0416Qth4eHh7fLy5v3k9tM0ug2ua/rxHh4eHglb6sNdi/5TuKJSsB4eHh4Y16eceebR7407baR86IKNB4eHt6A114uuvTR0MBZqo2Hh4f3Tl5eqL1RhJ0ME9StLzw8PLwlXlskTZLps6HStswRRYWHh4d3gZe0uNpHeb5V5BvMY/fAw8PDG/C+ymMydHU2QJC30H5NqfHw8PBWeWfP2LZMcFbmSIa98kExPDw8vF3evMU1wU8Kx9HGgIeHh3eNlzyI80u312xT52Rx8fDw8D6Bd7YNtMhJEeTFAAEeHh7e23ntcEBbqjhriS3ve3h4eHirdc429OT28wLxi3vh4eHhXeDdS4K3Gv8JZqG/h4eHh/f6mt9kHLGGVg2m2QAAAABJRU5ErkJggg==" alt="微信分享二维码">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACJklEQVR42u3aUW7jMAwE0Nz/0ukBWjszlF0g8tNX0WJtPS8wECm+XvF6/1rt74/+evSW1x0LAwPjaxnv05Vs62gTCXj2Of6gYmBgPIBxlGD5ho42l2fj+Xs/PBkDAwNjdLBbCWUMDAyMdUZy4Dt/fhLTGBgYGG0Rm2wlL3fPj4w31uIYGBhfyMi77v//8y33GxgYGF/FeJdr1nrLy9rZwsDA2JuRB9wdAxMrgYuBgfE0RlvQrgyQrcRx3sLDwMDYj9FG5KwZ146a1cMcGBgYWzNmsZu/fhamycfFwMB4AiN5fdsaS56WHxyj0hcDA+MBjHbMIo/I9sA3HKfAwMB4DCM5P64g85NpDvsjcDEwMLZmrDTl23I3+XDF3jAwMLZmzEYr8svI2RDYeSgXB0cMDIyNGLMiMw/Kq/DRsAUGBsamjKvaavf9q+H/CQYGxqaMNuxWRitWhi0+BC4GBsZGjPbKcBaabRC3164YGBh7M9oW/PrLVkrc4lCIgYGxKSN/RDIk0cbxBRNfGBgYD2AkETkbg1gZmxjeu2JgYGzKyKNw5fjYjlYUb8HAwNiU8S5X29CfhWlNxcDA2JrRFqiz8YjZ9cNVZTAGBsYejFmzPtni7FsOAxcDA+MBjDz48lZdXvS2l6MYGBgYeVwmVwizbdXnWQwMDIyyuTYrevOy9vB6AAMDY2vGVZcB9Q1qewQ82g8GBsbWjPahSVtt1kprt46BgfEAxg/RpLJQvSignAAAAABJRU5ErkJggg==" alt="微信分享二维码">
     </div>
 </div>
 

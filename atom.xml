@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2017-07-04T06:42:57.568Z</updated>
+  <updated>2017-07-04T06:47:50.030Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -16,14 +16,14 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>reduce/reduceRight处理异步同步化</title>
-    <link href="http://yoursite.com/2017/07/03/reducereduceRight%E5%A4%84%E7%90%86%E5%BC%82%E6%AD%A5%E5%90%8C%E6%AD%A5%E5%8C%96/"/>
-    <id>http://yoursite.com/2017/07/03/reducereduceRight处理异步同步化/</id>
+    <title>reduce处理异步同步化</title>
+    <link href="http://yoursite.com/2017/07/03/reduce%E5%A4%84%E7%90%86%E5%BC%82%E6%AD%A5%E5%90%8C%E6%AD%A5%E5%8C%96/"/>
+    <id>http://yoursite.com/2017/07/03/reduce处理异步同步化/</id>
     <published>2017-07-03T02:37:14.000Z</published>
-    <updated>2017-07-04T06:42:57.568Z</updated>
+    <updated>2017-07-04T06:47:50.030Z</updated>
     
     <content type="html"><![CDATA[<p>  在业务开发中遇到了一个场景，需要command-line linerface，然后程序根据用户输入做出不同处理，并且用户的输入是连续的。在查找了node.js的文档后，我找到了readLine的api。</p>
-<h2 id="什么是readLine"><a href="#什么是readLine" class="headerlink" title="什么是readLine"></a>什么是readLine</h2><p>  readLine是node.js里实现标准输入输出的模块，通过这个模块我们可以以逐行的方式读取数据流。</p>
+<h2 id="什么是readLine"><a href="#什么是readLine" class="headerlink" title="什么是readLine"></a>什么是readLine</h2><p>  readLine是node.js里实现标准输入输出的模块，通过这个模块我们可以以逐行的方式读取数据流。<br><a id="more"></a></p>
 <h3 id="如何使用readLine"><a href="#如何使用readLine" class="headerlink" title="如何使用readLine"></a>如何使用readLine</h3><ul>
 <li>创建readLine实例</li>
 <li>学习里面的接口方法</li>
@@ -46,7 +46,7 @@
     <summary type="html">
     
       &lt;p&gt;  在业务开发中遇到了一个场景，需要command-line linerface，然后程序根据用户输入做出不同处理，并且用户的输入是连续的。在查找了node.js的文档后，我找到了readLine的api。&lt;/p&gt;
-&lt;h2 id=&quot;什么是readLine&quot;&gt;&lt;a href=
+&lt;h2 id=&quot;什么是readLine&quot;&gt;&lt;a href=&quot;#什么是readLine&quot; class=&quot;headerlink&quot; title=&quot;什么是readLine&quot;&gt;&lt;/a&gt;什么是readLine&lt;/h2&gt;&lt;p&gt;  readLine是node.js里实现标准输入输出的模块，通过这个模块我们可以以逐行的方式读取数据流。&lt;br&gt;
     
     </summary>
     
