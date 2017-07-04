@@ -134,6 +134,94 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="node-reducereduceRight处理异步同步化" class="article article-type-node  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/03/reducereduceRight处理异步同步化/">reduce/reduceRight处理异步同步化</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/03/reducereduceRight处理异步同步化/" class="archive-article-date">
+  	<time datetime="2017-07-03T02:37:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>  在业务开发中遇到了一个场景，需要command-line linerface，然后程序根据用户输入做出不同处理，并且用户的输入是连续的。在查找了node.js的文档后，我找到了readLine的api。</p>
+<h2 id="什么是readLine"><a href="#什么是readLine" class="headerlink" title="什么是readLine"></a>什么是readLine</h2><p>  readLine是node.js里实现标准输入输出的模块，通过这个模块我们可以以逐行的方式读取数据流。</p>
+<h3 id="如何使用readLine"><a href="#如何使用readLine" class="headerlink" title="如何使用readLine"></a>如何使用readLine</h3><ul>
+<li>创建readLine实例</li>
+<li>学习里面的接口方法</li>
+<li>学习监听与处理readLine方法</li>
+</ul>
+<p>文档的例子<br><figure class="highlight javascript"><figcaption><span>```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> readline = <span class="built_in">require</span>(<span class="string">'readline'</span>);</div><div class="line"></div><div class="line"><span class="keyword">const</span> rl = readline.createInterface(&#123;</div><div class="line">  <span class="attr">input</span>: process.stdin,</div><div class="line">  <span class="attr">output</span>: process.stdout</div><div class="line">&#125;);</div><div class="line"></div><div class="line">rl.question(<span class="string">'What do you think of Node.js? '</span>, (answer) =&gt; &#123;</div><div class="line">  <span class="comment">// <span class="doctag">TODO:</span> Log the answer in a database</span></div><div class="line">  <span class="built_in">console</span>.log(<span class="string">`Thank you for your valuable feedback: <span class="subst">$&#123;answer&#125;</span>`</span>);</div><div class="line">  rl.close();</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<ul>
+<li>在createInterface里，传入标准输入输出作为数据的输入和输出</li>
+<li>在question方法的回调函数里，获取用户的输入并做相应处理，同时用close来结束程序。</li>
+</ul>
+<h2 id="promise"><a href="#promise" class="headerlink" title="promise"></a>promise</h2><p>  找到了readLine，可以满足我在终端用question来询问用户，进行终端输入了。本文真正的讲点从这里开始了，由于每一个question都是异步的，所以我们的多个终端顺序输入遇到了挑战。<br>  首先，把每一个输入操作都转成Promise的异步，将所有的操作放到数组里面，其次利用reduce累加器的效果，实现异步操作顺序化。<br><figure class="highlight javascript"><figcaption><span>```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">array.reduce(callback, [initialValue])</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">callback</span>(<span class="params">preValue, curValue, index, array</span>) </span>&#123;&#125;</div><div class="line">preValue: 上次调用回调返回的值或提供的初始值</div><div class="line">curValue: 数组中当前被处理的数组项</div><div class="line">index： 当前数组项在数组中的索引值</div><div class="line">array: 调用reduce方法的数组</div></pre></td></tr></table></figure></p>
+<p>  先看下reduce怎么解决Promise循环同步。<br>  不依赖reduce<br><figure class="highlight javascript"><figcaption><span>```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Promise</span>.resolve()</div><div class="line">.then(<span class="function"><span class="params">()</span>=&gt;</span>promise1)</div><div class="line">.then(<span class="function"><span class="params">()</span>=&gt;</span>promise2)</div><div class="line">.then(<span class="function"><span class="params">()</span>=&gt;</span>promise3)</div></pre></td></tr></table></figure></p>
+<p>利用reduce：在每一次callback返回一个Promise对象，而这个对象是对preValue对象的一个封装，将preValue.then(()=&gt;promiseInstance)返回，又在下一次的回调函数中，presValue为上个回调函数的返回值。<br><figure class="highlight javascript"><figcaption><span>```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Array</span>.from(<span class="built_in">Array</span>(<span class="number">100</span>))</div><div class="line">.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">promise, value</span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> promise.then(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve()</div><div class="line">  &#125;)</div><div class="line">&#125;,<span class="built_in">Promise</span>.resolve(<span class="string">'init'</span>));</div></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><figcaption><span>```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">read</span>(<span class="params">msg</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">    resolve();</div><div class="line">  &#125;);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">compose</span>(<span class="params">...args</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> args.reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> &#123;</div><div class="line">    <span class="keyword">return</span> a.then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">      <span class="keyword">return</span> b;</div><div class="line">    &#125;);</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line"><span class="keyword">const</span> a = read(<span class="string">'step1'</span>);</div><div class="line"><span class="keyword">const</span> b = read(<span class="string">'step2'</span>);</div></pre></td></tr></table></figure>
+<p>结果是按照顺序 打印的<br><figure class="highlight javascript"><figcaption><span>```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">step1</div><div class="line">step2</div></pre></td></tr></table></figure></p>
+<p>但是我们的read还需要有一个readline的api，而且readline本身是异步的。代码<br><figure class="highlight javascript"><figcaption><span>```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> readline = <span class="built_in">require</span>(<span class="string">'readline'</span>);</div><div class="line"></div><div class="line"><span class="keyword">const</span> rlp = readline.createInterface(&#123;</div><div class="line">  <span class="attr">input</span>: process.stdin,</div><div class="line">  <span class="attr">output</span>: process.stdout</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">read</span>(<span class="params">msg</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>) =&gt;</span> &#123;</div><div class="line">       rlp.question(msg+<span class="string">'\n'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">input</span>) </span>&#123;</div><div class="line">        resolve(input);</div><div class="line">       &#125;);</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">compose</span>(<span class="params">...args</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> args.reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> &#123;</div><div class="line">      <span class="keyword">return</span> a().then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">        <span class="keyword">return</span> b();</div><div class="line">      &#125;);</div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">const</span> a = read(<span class="string">'step1'</span>);</div><div class="line"><span class="keyword">const</span> b = read(<span class="string">'step2'</span>);</div></pre></td></tr></table></figure></p>
+<p>能够完成循环执行promise的需求。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/Node.js/" class="article-tag-list-link color3">Node.js</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/07/03/reducereduceRight处理异步同步化/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-前端业务功能模块工程化" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -311,6 +399,10 @@ return o(t,i(n),arguments.length<3?void 0:u(arguments[2]))}})},function(t,n,r){v
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+              </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">generate</a>
