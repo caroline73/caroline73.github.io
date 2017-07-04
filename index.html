@@ -233,23 +233,10 @@
 <li>功能模块单一</li>
 <li>多个项目都会用到</li>
 </ul>
-<p>例如上面的例子，竞猜模块，基本现在我所在的业务线都会用到，而且业务逻辑基本不变。竞猜里面的逻辑和其他的项目功能基本没有耦合，仅仅是有弹窗的需求，还利用了弹窗组件可以传递ui和hanlder的接口解耦。后期如果竞猜的模块功能有修改，不影响其他的功能。所以在处理前端功能模块的时候，不自觉的就会设计高内聚低耦合，这样方便后期的维护以及项目里面的解耦。</p>
-</blockquote>
-<h2 id="前端功能模块的开发"><a href="#前端功能模块的开发" class="headerlink" title="前端功能模块的开发"></a>前端功能模块的开发</h2><blockquote>
-<p>很多人说，那我开发一个模块，自己建立一个项目写好了打包一个，用就可以了。的确，如果模块是一个人维护的话，这样运作是没有问题的，但是如果上升到团队维护，确实有问题。</p>
-<ul>
-<li>团队的多人维护，需要一个统一的目录规范，那么每个人download文件，不用花费任何看项目结构的时间，既可以开发维护；</li>
-<li>如果随着团队基础工具的升级，那么模块开发工具也可以统一升级，不要额外每个模块都去添加打包编译的工具性代码，毕竟模块处理自己的功能逻辑是主旋律；</li>
-<li>将目录生成、编译打包和模块业务功能拆分，是按照基础服务、业务功能这种层次划分的，互不影响。</li>
-</ul>
-</blockquote>
-<h2 id="fe-module-generater"><a href="#fe-module-generater" class="headerlink" title="fe-module-generater"></a>fe-module-generater</h2><blockquote>
-<p><a href="https://github.com/caroline73/fe-module-generater" target="_blank" rel="external">fe-module-generater</a><br>前端模块开发目录生成器</p>
-</blockquote>
-<h2 id="fe-module-build"><a href="#fe-module-build" class="headerlink" title="fe-module-build"></a>fe-module-build</h2><blockquote>
-<p><a href="https://github.com/caroline73/fe-module-build" target="_blank" rel="external">fe-module-build</a><br>前端模块编译工具</p>
-</blockquote>
-
+<p>例如上面的例子，竞猜模块，基本现在我所在的业务线都会用到，而且业务逻辑基本不变。竞猜里面的逻辑和其他的项目功能基本没有耦合，仅仅是有弹窗的需求，还利用了弹窗组件可以传递ui和hanlder的接口解耦。后期如果竞猜的模块功能有修改，不影响其他的功能。所以在处理前端功能模块的时候，不自觉的就会设计高内聚低耦合，这样方便后期的维护以及项目里面的解耦。<br>
+        
+          <a class="article-more-a" href="/2017/06/13/前端业务功能模块工程化/#more">more >></a>
+        
       
 
       
